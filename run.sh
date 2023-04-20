@@ -1,7 +1,7 @@
 #!/bin/bash
 
-gcc -c cell.c;
-gcc -c main.c;
-gcc cell.o main.o -o main;
+gcc -c -g3 cell.c;
+gcc -c -g3 main.c;
+gcc -g3 cell.o main.o -lm -o main;
 
 rm -rf *.o;

@@ -11,15 +11,15 @@
 
 typedef struct CELL_S{
   int id;
-  position_t pos;
   position_t scr_pos;
   double* kij;
   double ang;
   double ang_vel;
 } cell_t;
 
-cell_t* initialize_cell(int, position_t, position_t, double*, int, int);
+cell_t* initialize_cell(int, position_t, int, int);
 void destroy_cell(cell_t*);
 void update_cell_ang(cell_t*, cell_t**, double, int);
+double to_deg(double);
 
 #endif
