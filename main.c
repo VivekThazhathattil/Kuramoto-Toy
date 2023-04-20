@@ -1,3 +1,5 @@
+// Ref paper: https://guava.physics.uiuc.edu/~nigel/courses/569/Essays_Fall2011/Files/bonnell.pdf
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -25,7 +27,6 @@
 
 #define gotoxy(x,y) printf("\033[%d;%dH", (y), (x))
 
-/* Checking if a toy model of Kuramoto works or not */
 /* Idea: Each cell cycles through the 7 colors depending on their angle.
  * According to Kuramoto model, we'd expect to see all the cells pulsate
  * with same color at some point of time. Let's see if actually works or not :)
@@ -57,8 +58,8 @@ void draw_cells(char* c, position_t pos, int color_id){
 
 int main(void){
   srand(time(0));
-  /* Testing for a sample grid 6x3 */
-  int num_cells_x = 10;
+  /* Sample grid size for testing */
+  int num_cells_x = 20;
   int num_cells_y = 10;
   int num_cells = num_cells_x * num_cells_y;
   char* blk_sym = "■";
@@ -83,8 +84,7 @@ int main(void){
   for(double curr_time = 0; curr_time < total_time; curr_time += tstep){
     usleep(frame_update_delay);
     for(int i = 0; i < num_cells; ++i){
-        //int color_id = rand()%7;
-        int color_id = round(to_deg(cells[i]->ang)*7/360);
+        int color_id = round(cells[i]->ang*7/(2*M_PI));
         draw_cells(blk_sym, cells[i]->scr_pos, color_id);
         update_cell_ang(cells[i], cells, tstep, num_cells);
     }
